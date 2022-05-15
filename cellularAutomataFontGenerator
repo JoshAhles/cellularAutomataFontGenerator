@@ -1,0 +1,1817 @@
+//used the Processing ide
+//file extension .pde
+//coded in Java
+
+import peasy.*;
+PeasyCam cam;
+
+int sSize = 80;
+int dimension = 5;
+int arraySize = sSize/dimension;
+boolean [][][] cellularAutomata;
+
+PFont f;
+PFont t;
+// Variable to store text currently being typed
+char typing = ' ';
+
+// Variable to store saved text when return is hit
+char saved = ' ';
+
+//make a 5 x 7 grid to draw the blocks out to spell the letter
+
+void setup() {
+  
+  size(1000, 1300, P3D);
+  cam = new PeasyCam(this, 800);
+  cam.setMinimumDistance(100);
+  cam.setMaximumDistance(1000);
+  cam.setSuppressRollRotationMode();
+  reset();
+  
+  f = createFont("Times New Roman", 30);
+  t = createFont("Times New Roman", 18);
+  
+}
+
+void reset() {
+
+  //3d automata implementation idea derived from tutorial: https://www.youtube.com/watch?v=BO1oPxFKtts
+  cellularAutomata = new boolean[arraySize][arraySize][arraySize];
+  for(int i = 0; i < arraySize; i++) {
+    for(int j = 0; j < arraySize; j++){
+      if(random(1) < 0.5){
+        cellularAutomata[i][j][0] = true;
+      } else {
+        cellularAutomata[i][j][0] = false;
+      }
+    }
+  }
+}  
+
+void draw() {
+  
+  color from = color(204, 102, 0);
+  color to = color(0, 102, 153);
+  color interA = lerpColor(from, to, .33);
+  color interB = lerpColor(from, to, .66);
+  background(interB);
+  lights();
+  
+  textFont(t);
+  fill(#F7E1D7);
+  text("Click in this window and type a character to generate your font. Hit enter to save. ", -320, -360);
+  text("Press SPACEBAR to regenerate the cellular automata", -320, -340);
+  text("Input: " + typing, -300, -310);
+  text("Character Being Generated: " + saved, -300, -290);
+  textFont(f);
+  fill(#F7E1D7);
+  text("3D Cellular Automata Font Generator by Josh Ahles", -320, -400);
+  text("---------------------------------------------------------------", -320, -380);
+  
+  for(int i = 0; i < arraySize; i++) {
+    for (int j = 0; j < arraySize; j++) {
+      for (int k = 0; k < arraySize; k++) {
+        if (cellularAutomata[i][j][k]) {
+          
+          //logic for which character to generate [a-z][0-9]
+          if (saved == 'a' || saved =='A') {
+            
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+       
+            gridCell6(i,j,k);
+            
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+            
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'b' || saved =='B') {
+            
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            
+            gridCell21(i,j,k);
+            
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+           
+            
+          }
+          
+          if (saved == 'c' || saved =='C') {
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            
+            gridCell6(i,j,k);
+         
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell16(i,j,k);
+            
+            gridCell21(i,j,k);
+           
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+             
+          }
+          
+          if (saved == 'd' || saved =='D') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+           
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+           
+            
+          }
+          
+          if (saved == 'e' || saved =='E') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+            
+            gridCell11(i,j,k);
+           
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            
+            gridCell21(i,j,k);
+            
+            gridCell26(i,j,k);
+            
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'f' || saved =='F') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell11(i,j,k);
+           
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+           
+            gridCell21(i,j,k);
+          
+          
+            gridCell26(i,j,k);
+            
+            gridCell31(i,j,k);
+           
+            
+          }
+          
+          if (saved == 'g' || saved =='G') {
+          
+           
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+           
+            gridCell6(i,j,k);
+            
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell16(i,j,k);
+            
+            gridCell21(i,j,k);
+            
+            gridCell24(i,j,k);
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+            
+          }
+          
+          if (saved == 'h' || saved =='H') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+           
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+          
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'i' || saved =='I') {
+          
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            
+          
+            gridCell8(i,j,k);
+            
+           
+            gridCell13(i,j,k);
+           
+            gridCell18(i,j,k);
+           
+            gridCell23(i,j,k);
+            
+            gridCell28(i,j,k);
+           
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+            
+          }
+          
+          if (saved == 'j' || saved =='J') {
+          
+            
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+            
+         
+            gridCell9(i,j,k);
+           
+           
+            gridCell14(i,j,k);
+           
+            
+            gridCell19(i,j,k);
+            
+            gridCell24(i,j,k);
+            
+            gridCell26(i,j,k);
+            
+            gridCell29(i,j,k);
+            
+            
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            
+            
+          }
+          
+          if (saved == 'k' || saved =='K') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell9(i,j,k);
+            
+            gridCell11(i,j,k);
+            
+            gridCell13(i,j,k);
+           
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            
+            gridCell21(i,j,k);
+            
+            gridCell23(i,j,k);
+            
+            
+            gridCell26(i,j,k);
+           
+            gridCell29(i,j,k);
+           
+            gridCell31(i,j,k);
+            
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'l' || saved =='L') {
+          
+            gridCell1(i,j,k);
+          
+            gridCell6(i,j,k);
+            
+            gridCell11(i,j,k);
+           
+            gridCell16(i,j,k);
+           
+            gridCell21(i,j,k);
+            
+            gridCell26(i,j,k);
+            
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'm' || saved =='M') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+            gridCell7(i,j,k);
+          
+            gridCell9(i,j,k);
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell13(i,j,k);
+          
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            
+            gridCell18(i,j,k);
+           
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+           
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'n' || saved =='N') {
+          
+            gridCell1(i,j,k);
+          
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+            
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            gridCell12(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+           
+            gridCell18(i,j,k);
+            
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            
+            gridCell24(i,j,k);
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+           
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'o' || saved =='O') {
+          
+            
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+           
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+          
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+           
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            
+            gridCell30(i,j,k);
+           
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+            
+          }
+          
+          if (saved == 'p' || saved =='P') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            gridCell21(i,j,k);
+            
+            gridCell26(i,j,k);
+           
+            gridCell31(i,j,k);
+           
+            
+          }
+          
+          if (saved == 'q' || saved =='Q') {
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+           
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            gridCell23(i,j,k);
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+          
+            gridCell29(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'r' || saved =='R') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            gridCell21(i,j,k);
+            gridCell23(i,j,k);
+            gridCell26(i,j,k);
+            gridCell29(i,j,k);
+            gridCell31(i,j,k);
+           
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 's' || saved =='S') {
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell11(i,j,k);
+            
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            
+            gridCell25(i,j,k);
+            
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == 't' || saved =='T') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+           
+            gridCell8(i,j,k);
+            
+            gridCell13(i,j,k);
+          
+            
+            gridCell18(i,j,k);
+           
+            gridCell23(i,j,k);
+            
+            gridCell28(i,j,k);
+          
+            gridCell33(i,j,k);
+           
+            
+          }
+          
+          if (saved == 'u' || saved =='U') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            
+            gridCell30(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == 'v' || saved =='V') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            
+            gridCell20(i,j,k);
+            
+            gridCell22(i,j,k);
+          
+            gridCell24(i,j,k);
+            gridCell27(i,j,k);
+            gridCell29(i,j,k);
+            gridCell33(i,j,k);
+            
+          }
+          
+          if (saved == 'w' || saved =='W') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell18(i,j,k);
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            gridCell23(i,j,k);
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            gridCell28(i,j,k);
+            gridCell30(i,j,k);
+            gridCell32(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == 'x' || saved =='X') {
+          
+            gridCell1(i,j,k);
+           
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+            
+            gridCell12(i,j,k);
+          
+            gridCell14(i,j,k);
+          
+            
+            gridCell18(i,j,k);
+        
+           
+            gridCell22(i,j,k);
+         
+            gridCell24(i,j,k);
+           
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            gridCell31(i,j,k);
+           
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == 'y' || saved =='Y') {
+          
+            gridCell1(i,j,k);
+          
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+          
+            gridCell12(i,j,k);
+          
+            gridCell14(i,j,k);
+         
+         
+            gridCell18(i,j,k);
+          
+          
+            gridCell23(i,j,k);
+         
+           
+           
+            gridCell28(i,j,k);
+            
+            
+            gridCell33(i,j,k);
+            
+            
+          }
+          
+          if (saved == 'z' || saved =='Z') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+           
+            gridCell10(i,j,k);
+           
+            gridCell14(i,j,k);
+            
+           
+            gridCell18(i,j,k);
+          
+            gridCell22(i,j,k);
+           
+            gridCell26(i,j,k);
+            
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == '0') {
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i,j,k);
+         
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+            
+            gridCell14(i,j,k);
+            gridCell15(i,j,k);
+            gridCell16(i,j,k);
+            gridCell18(i,j,k);
+            gridCell20(i,j,k);
+            gridCell21(i,j,k);
+            gridCell22(i,j,k);
+          
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            
+            gridCell30(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == '1') {
+          
+          
+            gridCell3(i,j,k);
+            
+            gridCell7(i,j,k);
+            gridCell8(i,j,k);
+        
+           
+            gridCell13(i,j,k);
+          
+           
+            gridCell18(i,j,k);
+           
+          
+            gridCell23(i,j,k);
+            
+          
+            gridCell28(i,j,k);
+           
+            
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == '2') {
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i,j,k);
+            
+            gridCell10(i,j,k);
+           
+            gridCell15(i,j,k);
+           
+            gridCell19(i,j,k);
+          
+            gridCell23(i,j,k);
+         
+            gridCell27(i,j,k);
+           
+            gridCell31(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            gridCell35(i,j,k);
+            
+          }
+          
+          if (saved == '3') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+           
+            gridCell9(i,j,k);
+            
+            gridCell13(i,j,k);
+           
+            gridCell19(i,j,k);
+           
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+            
+            gridCell30(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == '4') {
+          
+         
+            gridCell4(i,j,k);
+            gridCell8(i,j,k);
+            gridCell9(i,j,k);
+            gridCell12(i,j,k);
+            gridCell14(i,j,k);
+            gridCell16(i,j,k);
+         
+            gridCell19(i,j,k);
+            gridCell21(i,j,k);
+            gridCell22(i,j,k);
+            gridCell23(i,j,k);
+            gridCell24(i,j,k);
+            gridCell25(i,j,k);
+            
+            gridCell29(i,j,k);
+           
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == '5') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+            gridCell6(i,j,k);
+           
+            gridCell11(i,j,k);
+            gridCell12(i,j,k);
+            gridCell13(i,j,k);
+            gridCell14(i,j,k);
+            
+        
+            gridCell20(i,j,k);
+         
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+          
+            gridCell30(i,j,k);
+        
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == '6') {
+          
+            gridCell2(i, j, k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i, j, k);
+           
+         
+            gridCell11(i,j,k);
+            
+            gridCell16(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            
+            gridCell21(i,j,k);
+          
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+            
+          }
+          
+          if (saved == '7') {
+          
+            gridCell1(i,j,k);
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell5(i,j,k);
+            
+            gridCell10(i,j,k);
+           
+            gridCell14(i,j,k);
+          
+         
+            gridCell18(i,j,k);
+           
+            gridCell22(i,j,k);
+            
+            
+            gridCell27(i,j,k);
+            
+            gridCell32(i,j,k);
+            
+          }
+          
+          if (saved == '8') {
+          
+            
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+         
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+         
+            gridCell15(i,j,k);
+          
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+          
+            gridCell21(i,j,k);
+           
+            gridCell25(i,j,k);
+            gridCell26(i,j,k);
+           
+            gridCell30(i,j,k);
+           
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            gridCell34(i,j,k);
+           
+            
+          }
+          
+          if (saved == '9') {
+          
+            gridCell2(i,j,k);
+            gridCell3(i,j,k);
+            gridCell4(i,j,k);
+            gridCell6(i,j,k);
+          
+            gridCell10(i,j,k);
+            gridCell11(i,j,k);
+           
+            gridCell15(i,j,k);
+            gridCell17(i,j,k);
+            gridCell18(i,j,k);
+            gridCell19(i,j,k);
+            gridCell20(i,j,k);
+           
+            gridCell25(i,j,k);
+          
+            gridCell29(i,j,k);
+           
+            gridCell32(i,j,k);
+            gridCell33(i,j,k);
+            
+            
+          }
+          
+        }
+      }
+    }
+  }
+  
+  showSimulationBox();
+  
+}
+
+void keyPressed() {
+  // If the return key is pressed, save the String and clear it
+  if (key == ' ' ) {
+    reset();
+  }
+  if (key == '\n' ) {
+    saved = typing;
+    // A String can be cleared by setting it equal to ""
+    typing = ' '; 
+  } else {
+    // Otherwise, concatenate the String
+    // Each character typed by the user is added to the end of the String variable.
+    typing = key;
+  }
+  
+}
+  
+
+void showSimulationBox(){
+  
+  pushMatrix();
+  translate(sSize/2, sSize/2, sSize/2);
+  scale(sSize, sSize, sSize);
+  //stroke(#FFFFFF);
+  //strokeWeight(0.9/sSize);
+  strokeWeight(0);
+  noFill();
+  box(1,1,1);
+  popMatrix();
+ 
+  
+}
+
+//////////////////////////////////
+// 1st ROW
+//////////////////////////////////
+void gridCell1(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, (y-48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell2(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, (y-48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell3(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, (y-48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell4(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, (y-48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell5(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, (y-48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+//////////////////////////////////
+// 2nd ROW
+//////////////////////////////////
+void gridCell6(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, (y-32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell7(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, (y-32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell8(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, (y-32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell9(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, (y-32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell10(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, (y-32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+//////////////////////////////////
+// 3rd ROW
+//////////////////////////////////
+void gridCell11(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, (y-16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell12(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, (y-16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell13(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, (y-16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell14(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, (y-16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell15(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, (y-16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+//////////////////////////////////
+// 4th ROW
+//////////////////////////////////
+void gridCell16(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, y*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell17(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, y*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell18(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, y*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell19(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, y*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell20(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, y*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+//////////////////////////////////
+// 5th ROW
+//////////////////////////////////
+void gridCell21(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, (y+16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell22(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, (y+16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell23(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, (y+16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell24(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, (y+16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell25(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, (y+16)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+//////////////////////////////////
+// 6th ROW
+//////////////////////////////////
+void gridCell26(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, (y+32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell27(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, (y+32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell28(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, (y+32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell29(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, (y+32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell30(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, (y+32)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+//////////////////////////////////
+// 7th ROW
+//////////////////////////////////
+void gridCell31(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-40)*dimension+dimension/2, (y+48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell32(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-24)*dimension+dimension/2, (y+48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell33(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x-8)*dimension+dimension/2, (y+48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell34(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+8)*dimension+dimension/2, (y+48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+}
+
+void gridCell35(int x, int y, int z) {
+  float color1;
+  float color2;
+  float color3;
+  color1 = random(0, 256);
+  color2 = random(0, 256);
+  color3 = random(0, 256);
+  //print(color1);
+  //print(color2);
+  //print(color3);
+  pushMatrix();
+  translate((x+24)*dimension+dimension/2, (y+48)*dimension+dimension/2, z*dimension+dimension/2);
+  scale(dimension, dimension, dimension);
+  fill(#FFFFFF);
+  stroke(100);
+  strokeWeight(1.0/dimension);
+  box(1,1,1);
+  popMatrix();
+  
+}
